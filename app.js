@@ -10,15 +10,10 @@ var pgp = require('pg-promise')(options);
 
 var db = pgp('postgres://localhost:5432/instapics');
 
-app.get("/users",function(req,res, next){
+app.get("/users",function(req,res,next){
 	db.any('SELECT * FROM users')
 	.then(function(data){
-		res.status(200)
-		.json({
-			status: 'success',
-			data: data,
-			message: 'Retrieves ALL users'
-		});
+		res.render('index',{ data: data });
 	})
 	.catch(function(err){
 		return next(err);
