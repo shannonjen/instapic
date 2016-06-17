@@ -1,3 +1,6 @@
 <h1>All Users</h1>
-
-<p>{{data}}</p>
+<ul>	
+	{{#each data}}
+	<li>{{this.username}}</li>
+	{{/each}}
+</ul>
