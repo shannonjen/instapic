@@ -25,8 +25,19 @@ app.get('/users',function(req,res,next){
 	});
 });
 
-app.post("/users",function(req,res){
+app.get('/users/:id', function(req,res,next){
+	var userId = req.params.id;
+	db.one('SELECT * FROM users WHERE id = $1', userId)
+     .then(function (data) {
+       res.render('show', {username:data.username} );
+		 })
+		 .catch(function(err){
+		 	return next(err);
+		 });
+});
 
+app.post("/users",function(req,res){
+	res.response("req.body.username");
 });
 
 
